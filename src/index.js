@@ -2,9 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-const First = function(props) {
-  return <h1>hello world</h1>;
-};
+class Hello extends React.Component{
+    render(){
+        return <div><h1>Hello World</h1></div>;
+    }
+}
 
-ReactDOM.render(<First />, document.getElementById("root"));
+
+
+
+
+ReactDOM.render(<Hello />, document.getElementById("root"));
 
