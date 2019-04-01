@@ -1,6 +1,8 @@
 body {
   margin: 0;
   padding: 0;
+  height: 99%;
+  width: 100%;  
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -11,4 +13,41 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+main {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* 100 % height of view point */
+  width: 100%;
+  background: aqua;
+}
+
+.box {
+  width: 300px;
+  height: 500px;
+  background: blue;
+}
+
+.display {
+  width: 100%;
+  height: 30%;
+  background: red;
+}
+
+.buttons {
+  width: 100%;
+  height: 70%;
+  background-color: burlywood;
+}
+
+.button-row {
+  height: 25%;
+  background: silver;
+}
+
+.button-row > button {
+  height: 100%;
+  width: 25%;
 }
