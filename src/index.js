@@ -24,8 +24,6 @@ const OP = {
   "/": divide
 };
 
-
-
 class Box extends React.Component {
   render() {
     return (
@@ -85,16 +83,20 @@ const calculate = function() {
 
   classifiedExpression.forEach((val, index) => {
     if (OPERATORS.includes(val)) {
-      // const leftSide = result !== undefined ? classifiedExpression[index - 1] : result;
-      const leftSide = classifiedExpression[index - 1];
+      let leftSide;
+
+      if (result !== undefined) {
+        leftSide = result;
+      } else {
+        leftSide = classifiedExpression[index - 1];
+      }
       const rightSide = classifiedExpression[index + 1];
       const executer = OP[val];
       result = executer(leftSide, rightSide);
     }
   });
-  console.log(result)
+  console.log(result);
   return result;
-
 };
 
 const displaySymbol = function(symbol) {
