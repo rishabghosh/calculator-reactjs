@@ -11,6 +11,21 @@ const KEY_ROWS = [
 
 let expression = "";
 
+const add = (a, b) => +a + +b;
+const subtract = (a, b) => +a - +b;
+const multiply = (a, b) => +a * +b;
+const divide = (a, b) => +a / +b;
+
+const OPERATORS = ["+", "-", "*", "/"];
+const OP = {
+  "+": add,
+  "-": subtract,
+  "*": multiply,
+  "/": divide
+};
+
+
+
 class Box extends React.Component {
   render() {
     return (
@@ -34,7 +49,9 @@ class KeyPad extends React.Component {
   render() {
     return (
       <div className="buttons">
-        {KEY_ROWS.map(row => ( <ButtonRow symbols={row} /> ))}
+        {KEY_ROWS.map(row => (
+          <ButtonRow symbols={row} />
+        ))}
       </div>
     );
   }
@@ -57,8 +74,36 @@ class ButtonRow extends React.Component {
   }
 }
 
+const calculate = function() {
+  let newExperssion = expression;
+  OPERATORS.forEach(op => {
+    newExperssion = newExperssion.split(op).join(" " + op + " ");
+  });
+
+  const classifiedExpression = newExperssion.split(" ");
+  let result;
+
+  classifiedExpression.forEach((val, index) => {
+    if (OPERATORS.includes(val)) {
+      // const leftSide = result !== undefined ? classifiedExpression[index - 1] : result;
+      const leftSide = classifiedExpression[index - 1];
+      const rightSide = classifiedExpression[index + 1];
+      const executer = OP[val];
+      result = executer(leftSide, rightSide);
+    }
+  });
+  console.log(result)
+  return result;
+
+};
+
 const displaySymbol = function(symbol) {
-  expression += symbol;
+  console.log(symbol);
+  if (symbol === "=") {
+    expression = calculate();
+  } else {
+    expression += symbol;
+  }
   ReactDOM.render(<Box />, document.getElementById("root"));
 };
 
