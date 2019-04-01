@@ -2,13 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
+const KEY_ROWS = [
+  ["1", "2", "3", "+"],
+  ["4", "5", "6", "-"],
+  ["7", "8", "9", "*"],
+  ["0", ".", "=", "/"]
+];
+
+let expression = "";
+
 class Box extends React.Component {
   render() {
     return (
       <main>
         <div className="box">
           <Display />
-          <Buttons />
+          <KeyPad />
         </div>
       </main>
     );
@@ -21,27 +30,15 @@ class Display extends React.Component {
   }
 }
 
-class Buttons extends React.Component {
+class KeyPad extends React.Component {
   render() {
     return (
       <div className="buttons">
-        <ButtonRow symbols={symbols.row1} />
-        <ButtonRow symbols={symbols.row2} />
-        <ButtonRow symbols={symbols.row3} />
-        <ButtonRow symbols={symbols.row4} />
+        {KEY_ROWS.map(row => ( <ButtonRow symbols={row} /> ))}
       </div>
     );
   }
 }
-
-const symbols = {
-  row1: ["1", "2", "3", "+"],
-  row2: ["4", "5", "6", "-"],
-  row3: ["7", "8", "9", "*"],
-  row4: ["0", ".", "=", "/"]
-};
-
-let expression = "";
 
 class ButtonRow extends React.Component {
   constructor(props) {
@@ -71,7 +68,9 @@ class Button extends React.Component {
     this.symbol = props.symbol;
   }
   render() {
-    return <button onClick={()=> displaySymbol(this.symbol)}>{this.symbol}</button>;
+    return (
+      <button onClick={() => displaySymbol(this.symbol)}>{this.symbol}</button>
+    );
   }
 }
 
